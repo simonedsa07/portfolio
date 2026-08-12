@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import simonePhoto from "./assets/simone.jpg";
 
 /**
  * Design tokens
@@ -397,14 +398,14 @@ export default function SimonePortfolio() {
                 className="relative border-2 rounded-sm p-4 pb-14 hover-lift"
                 style={{ backgroundColor: COLORS.clay, borderColor: COLORS.ink, boxShadow: "10px 10px 0px rgba(28,31,24,0.12)" }}
               >
-                <div
-                  className="aspect-[4/5] w-full flex items-center justify-center rounded-sm float-slow"
-                  style={{ backgroundColor: COLORS.forest }}
-                >
-                  <span style={{ ...display, fontStyle: "italic", color: COLORS.sage, fontSize: "5rem" }}>S</span>
-                </div>
+                <img
+                  src={simonePhoto}
+                  alt="Simone D'sa"
+                  className="aspect-[4/5] w-full object-cover rounded-sm float-slow border"
+                  style={{ borderColor: COLORS.ink }}
+                />
                 <p className="text-center text-xs mt-4" style={{ ...mono, color: COLORS.ink }}>
-                  designer who codes, probably
+                  A Designer who codes!
                 </p>
               </div>
               <Reveal
