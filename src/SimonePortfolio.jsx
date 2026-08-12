@@ -214,6 +214,15 @@ export default function SimonePortfolio() {
         .hover-lift { transition: transform 0.35s cubic-bezier(.22,1,.36,1), box-shadow 0.35s ease; }
         .hover-lift:hover { transform: translateY(-6px) rotate(-0.5deg); }
 
+        .contact-link-pop {
+          transition: background-color 0.35s cubic-bezier(.22,1,.36,1), color 0.35s cubic-bezier(.22,1,.36,1), border-color 0.35s cubic-bezier(.22,1,.36,1), transform 0.35s cubic-bezier(.22,1,.36,1), box-shadow 0.35s ease;
+        }
+        .contact-link-pop:hover {
+          background-color: ${COLORS.cream} !important;
+          border-color: ${COLORS.ink} !important;
+          color: ${COLORS.ink} !important;
+        }
+
         .underline-grow { position: relative; }
         .underline-grow::after {
           content: ''; position: absolute; left: 0; bottom: -4px; height: 1px; width: 0%;
@@ -617,7 +626,7 @@ export default function SimonePortfolio() {
                 href="https://linkedin.com/in/simone-d-sa"
                 target="_blank"
                 rel="noreferrer"
-                className="px-6 py-3 rounded-full border text-sm hover-lift inline-block"
+                className="px-6 py-3 rounded-full border text-sm hover-lift contact-link-pop inline-block"
                 style={{ ...mono, borderColor: COLORS.cream, color: COLORS.cream }}
               >
                 LinkedIn ↗
@@ -628,7 +637,7 @@ export default function SimonePortfolio() {
                 href="https://github.com/simonedsa07"
                 target="_blank"
                 rel="noreferrer"
-                className="px-6 py-3 rounded-full border text-sm hover-lift inline-block"
+                className="px-6 py-3 rounded-full border text-sm hover-lift contact-link-pop inline-block"
                 style={{ ...mono, borderColor: COLORS.cream, color: COLORS.cream }}
               >
                 GitHub ↗
