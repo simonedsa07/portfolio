@@ -4,7 +4,7 @@ import simonePhoto from "./assets/simone.jpg";
 
 
 const COLORS = {
-  cream: "#dff0dfff",
+  cream: "#F5F5DC",
   ink: "#29180F",
   forest: "#3B2314",
   rust: "#E65F2B",
