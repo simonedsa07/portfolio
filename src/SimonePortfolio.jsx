@@ -1,29 +1,21 @@
 import React, { useState, useEffect, useRef } from "react";
 import simonePhoto from "./assets/simone.jpg";
 
-/**
- * Design tokens
- * cream:  #F3EEE2  paper background
- * ink:    #1C1F18  near-black text / dark sections
- * forest: #38452F  deep green section bg
- * rust:   #BF4E2C  accent (CTA, underline, dot)
- * sage:   #AEC08F  accent (chips, italic headline)
- * clay:   #E7DCC4  card / tag bg
- */
+
 
 const COLORS = {
-  cream: "#F3EEE2",
-  ink: "#1C1F18",
-  forest: "#38452F",
-  rust: "#BF4E2C",
-  sage: "#AEC08F",
-  clay: "#E7DCC4",
+  cream: "#dff0dfff",
+  ink: "#29180F",
+  forest: "#3B2314",
+  rust: "#E65F2B",
+  sage: "#F5B041",
+  clay: "#ECDCC9",
 };
 
-const FONT_IMPORT = `@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');`;
+const FONT_IMPORT = `@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');`;
 
-const display = { fontFamily: "'Fraunces', serif" };
-const body = { fontFamily: "'Space Grotesk', sans-serif" };
+const display = { fontFamily: "'Bricolage Grotesque', sans-serif" };
+const body = { fontFamily: "'Sora', sans-serif" };
 const mono = { fontFamily: "'JetBrains Mono', monospace" };
 
 const GRAIN_URL =
@@ -155,10 +147,10 @@ export default function SimonePortfolio() {
   const nav = ["Work", "About", "Skills", "Contact"];
 
   const facts = [
-    { label: "3rd-year IT student", sub: "Don Bosco Institute of Technology" },
-    { label: "Mumbai, India", sub: "University of Mumbai" },
-    { label: "Design + code", sub: "engineering meets visual craft" },
-    { label: "CGPA 8.27", sub: "Expected 2028" },
+    { label: "3rd-year IT student", sub: "Don Bosco Institute of Technology", color: "#F5B041", tapeColor: "rgba(230,95,43,0.85)" },
+    { label: "Mumbai, India", sub: "University of Mumbai", color: "#E65F2B", tapeColor: "rgba(59,35,20,0.85)", textColor: "#FDF8F4" },
+    { label: "Design + code", sub: "engineering meets visual craft", color: "#ECDCC9", tapeColor: "rgba(245,176,65,0.85)" },
+    { label: "CGPA 8.27", sub: "Expected 2028", color: "#3B2314", tapeColor: "rgba(230,95,43,0.85)", textColor: "#FDF8F4" },
   ];
 
   const factRot = [-3, 2, -2, 3];
@@ -350,13 +342,13 @@ export default function SimonePortfolio() {
                 from={`translateY(50px) rotate(${factRot[i] * 2}deg) scale(0.9)`}
                 to={`translateY(0) rotate(${factRot[i]}deg) scale(1)`}
                 className="relative hover-lift border rounded-sm px-4 py-4"
-                style={{ backgroundColor: COLORS.sage, borderColor: COLORS.ink, boxShadow: "6px 6px 0px rgba(28,31,24,0.1)" }}
+                style={{ backgroundColor: f.color, borderColor: COLORS.ink, boxShadow: `6px 6px 0px rgba(41,24,15,0.15)` }}
               >
-                <Tape top={-10} left="50%" rot={factRot[i]} wide={40} delay={i * 300} />
-                <p className="text-sm sm:text-base font-semibold" style={{ ...body, color: COLORS.ink }}>
+                <Tape top={-10} left="50%" rot={factRot[i]} wide={40} delay={i * 300} color={f.tapeColor} />
+                <p className="text-sm sm:text-base font-semibold" style={{ ...body, color: f.textColor || COLORS.ink }}>
                   {f.label}
                 </p>
-                <p className="text-xs mt-1" style={{ ...mono, color: COLORS.ink, opacity: 0.75 }}>
+                <p className="text-xs mt-1" style={{ ...mono, color: f.textColor || COLORS.ink, opacity: 0.75 }}>
                   {f.sub}
                 </p>
               </Reveal>

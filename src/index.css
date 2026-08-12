@@ -1,21 +1,21 @@
 @import "tailwindcss";
 
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
+  --text: #3B2314;
+  --text-h: #29180F;
+  --bg: #FDF8F4;
+  --border: rgba(41, 24, 15, 0.1);
+  --code-bg: #ECDCC9;
+  --accent: #E65F2B;
+  --accent-bg: rgba(230, 95, 43, 0.1);
+  --accent-border: rgba(230, 95, 43, 0.5);
+  --social-bg: rgba(236, 220, 201, 0.5);
   --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+    rgba(41, 24, 15, 0.08) 0 10px 15px -3px, rgba(41, 24, 15, 0.04) 0 4px 6px -2px;
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+  --sans: 'Sora', system-ui, 'Segoe UI', Roboto, sans-serif;
+  --heading: 'Bricolage Grotesque', system-ui, 'Segoe UI', Roboto, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
 
   font: 18px/145% var(--sans);
   letter-spacing: 0.18px;
@@ -34,17 +34,17 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
+    --text: #ECDCC9;
+    --text-h: #FDF8F4;
+    --bg: #29180F;
+    --border: rgba(253, 248, 244, 0.15);
+    --code-bg: #3B2314;
+    --accent: #F5B041;
+    --accent-bg: rgba(245, 176, 65, 0.15);
+    --accent-border: rgba(245, 176, 65, 0.5);
+    --social-bg: rgba(59, 35, 20, 0.5);
     --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+      rgba(0, 0, 0, 0.5) 0 10px 15px -3px, rgba(0, 0, 0, 0.3) 0 4px 6px -2px;
   }
 
   #social .button-icon {
