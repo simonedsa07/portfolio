@@ -4,7 +4,7 @@ import simonePhoto from "./assets/simone.jpg";
 
 
 const COLORS = {
-  cream: "#F5F5DC",
+  cream: "#FAF2EA",
   ink: "#29180F",
   forest: "#3B2314",
   rust: "#E65F2B",
@@ -255,6 +255,30 @@ export default function SimonePortfolio() {
         }
         .float-slow { animation: floatY 5s ease-in-out infinite; }
 
+        @keyframes floatPeony {
+          0%, 100% { transform: translateY(0) rotate(-12deg); }
+          50% { transform: translateY(-12px) rotate(-6deg); }
+        }
+        .float-sticker-peony {
+          animation: floatPeony 5s ease-in-out infinite;
+        }
+
+        @keyframes floatCam {
+          0%, 100% { transform: translateY(0) rotate(12deg); }
+          50% { transform: translateY(-15px) rotate(8deg); }
+        }
+        .float-sticker-cam {
+          animation: floatCam 6.2s ease-in-out infinite;
+        }
+
+        @keyframes floatCode {
+          0%, 100% { transform: translateY(0) rotate(-6deg); }
+          50% { transform: translateY(-10px) rotate(-12deg); }
+        }
+        .float-sticker-code {
+          animation: floatCode 4.5s ease-in-out infinite;
+        }
+
         @keyframes heroIn {
           from { opacity: 0; transform: translateY(28px); }
           to { opacity: 1; transform: translateY(0); }
@@ -323,7 +347,57 @@ export default function SimonePortfolio() {
 
       {/* HERO */}
       <section className="relative pt-16 sm:pt-24 pb-14">
-        <div className="max-w-6xl mx-auto px-6 sm:px-10 text-left">
+        {/* Floating Scrapbook Collage on the Right */}
+        <div className="absolute right-4 md:right-16 lg:right-28 top-20 md:top-24 w-80 h-96 hidden md:block pointer-events-none z-10">
+          {/* Peony 🌸 (Base layer) */}
+          <div className="absolute top-0 right-20 pointer-events-auto float-sticker-peony z-10">
+            <div className="hover:scale-125 transition-all duration-300 cursor-pointer drop-shadow-lg select-none">
+              <span className="text-7xl md:text-9xl">🌸</span>
+            </div>
+          </div>
+
+          {/* Code Sticker </> (Middle layer, placed between peony and camera) */}
+          <div className="absolute top-22 right-12 pointer-events-auto float-sticker-code z-30">
+            <div className="hover:scale-125 transition-all duration-300 cursor-pointer drop-shadow-md">
+              <div className="bg-[#FAF2EA] text-[#29180F] border-2 border-[#29180F] px-4 py-2 font-mono font-bold text-xl md:text-2xl shadow-[4px_4px_0px_#29180F] rounded-sm">
+                &lt;/&gt;
+              </div>
+              {/* Little piece of washi tape holding it down */}
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-10 h-3.5 bg-white/50 backdrop-blur-sm -rotate-3 border border-white/20 shadow-sm"></div>
+            </div>
+          </div>
+
+          {/* Digi Cam 📸 (Bottom layer of collage, positioned below peony and code) */}
+          <div className="absolute top-44 right-2 pointer-events-auto float-sticker-cam z-20">
+            <div className="hover:scale-125 transition-all duration-300 cursor-pointer drop-shadow-xl select-none">
+              <span className="text-6xl md:text-8xl">📸</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Decorative Floating SVG Sparkles to Enhance Hero */}
+        <svg
+          className="absolute top-6 left-12 w-6 h-6 fill-[#E65F2B] opacity-40 float-slow hidden md:block select-none pointer-events-none"
+          viewBox="0 0 24 24"
+          style={{ animationDelay: "200ms" }}
+        >
+          <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.6L12 0Z" />
+        </svg>
+        <svg
+          className="absolute bottom-28 left-1/3 w-8 h-8 fill-[#F5B041] opacity-50 float-slow hidden md:block select-none pointer-events-none"
+          viewBox="0 0 24 24"
+          style={{ animationDelay: "800ms" }}
+        >
+          <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.6L12 0Z" />
+        </svg>
+        <svg
+          className="absolute top-8 right-1/4 w-5 h-5 fill-[#FF007F] opacity-45 float-slow hidden md:block select-none pointer-events-none"
+          viewBox="0 0 24 24"
+          style={{ animationDelay: "500ms" }}
+        >
+          <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.6L12 0Z" />
+        </svg>
+        <div className="max-w-6xl mx-auto px-6 sm:px-10 text-left relative z-20">
           <p
             className="hero-line text-xs tracking-[0.25em] uppercase mb-5"
             style={{ ...mono, color: COLORS.rust, animationDelay: "80ms" }}
@@ -340,7 +414,13 @@ export default function SimonePortfolio() {
             className="hero-line leading-[1.1] mt-1 sm:mt-2"
             style={{ ...display, color: COLORS.forest, fontStyle: "italic", fontWeight: 500, fontSize: "clamp(2.2rem, 7vw, 5rem)", animationDelay: "320ms" }}
           >
-            builds things that work.
+            builds things that{" "}
+            <span className="relative inline-block px-1">
+              work.
+              <svg className="absolute -bottom-1.5 left-0 w-full h-2.5 fill-none stroke-[#E65F2B] stroke-[3px]" viewBox="0 0 100 10" preserveAspectRatio="none" style={{ strokeLinecap: "round" }}>
+                <path d="M2,8 C30,3 70,3 98,8" />
+              </svg>
+            </span>
           </p>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-12">
