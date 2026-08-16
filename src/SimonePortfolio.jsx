@@ -5,17 +5,17 @@ import simonePhoto from "./assets/simone.jpg";
    PALETTE — pastel iridescent / chrome / bold ink
    ============================================================ */
 const C = {
-  bg: "#EAF0FB",
-  ink: "#0B0B0C",
-  white: "#FFFFFF",
-  blue: "#8EC9FF",
-  pink: "#FFB8E6",
-  purple: "#C9B6FF",
-  mint: "#B6FFE0",
-  peach: "#FFD9B8",
-  red: "#FF4D4D",
-  green: "#3DDC84",
-  mute: "rgba(11,11,12,0.6)",
+  bg: "var(--bg)",
+  ink: "var(--ink)",
+  white: "var(--white)",
+  blue: "var(--blue)",
+  pink: "var(--pink)",
+  purple: "var(--purple)",
+  mint: "var(--mint)",
+  peach: "var(--peach)",
+  red: "var(--red)",
+  green: "var(--green)",
+  mute: "var(--mute)",
 };
 
 const FONT_IMPORT = `@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500;1,9..144,600&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');`;
@@ -96,15 +96,20 @@ function useParallax(speed = 0.2, rotateSpeed = 0) {
 
 function useMagnetic(strength = 0.3) {
   const ref = useRef(null);
+  const rectRef = useRef(null);
   const onMouseMove = (e) => {
     const el = ref.current;
     if (!el) return;
-    const r = el.getBoundingClientRect();
+    if (!rectRef.current) {
+      rectRef.current = el.getBoundingClientRect();
+    }
+    const r = rectRef.current;
     const x = e.clientX - (r.left + r.width / 2);
     const y = e.clientY - (r.top + r.height / 2);
     el.style.transform = `translate(${x * strength}px, ${y * strength}px)`;
   };
   const onMouseLeave = () => {
+    rectRef.current = null;
     if (ref.current) ref.current.style.transform = "translate(0,0)";
   };
   return { ref, onMouseMove, onMouseLeave };
@@ -295,6 +300,65 @@ function BubbleCluster({ size = 60, color = C.blue }) {
   );
 }
 
+function MiniCodeIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.85 }}>
+      <polyline points="16 18 22 12 16 6" />
+      <polyline points="8 6 2 12 8 18" />
+    </svg>
+  );
+}
+
+function MiniLayoutIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.85 }}>
+      <rect x="3" y="3" width="18" height="18" rx="2" />
+      <line x1="3" y1="9" x2="21" y2="9" />
+      <line x1="9" y1="21" x2="9" y2="9" />
+    </svg>
+  );
+}
+
+function MiniDbIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.85 }}>
+      <ellipse cx="12" cy="5" rx="9" ry="3" />
+      <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
+      <path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3" />
+    </svg>
+  );
+}
+
+function MiniSparkleIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.85 }}>
+      <polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9" />
+    </svg>
+  );
+}
+
+function MiniUsersIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.85 }}>
+      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+      <circle cx="9" cy="7" r="4" />
+      <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+    </svg>
+  );
+}
+
+function MiniPaletteIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.85 }}>
+      <path d="M12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22Z" />
+      <circle cx="7.5" cy="10.5" r="1.5" fill="currentColor" />
+      <circle cx="11.5" cy="7.5" r="1.5" fill="currentColor" />
+      <circle cx="16.5" cy="9.5" r="1.5" fill="currentColor" />
+    </svg>
+  );
+}
+
 
 /* Orbiting node diagram — center label with satellite dots
    circling on dashed rings, sly.systems "engine" motif */
@@ -313,7 +377,7 @@ function OrbitDiagram({ size = 200 }) {
         <span className="orbit-dot" style={{ background: C.purple, top: "auto", bottom: 0 }} />
       </div>
       <div className="absolute inset-0 flex items-center justify-center">
-        <span className="chrome-text" style={{ ...display, fontStyle: "italic", fontSize: size * 0.22 }}>S</span>
+        <span className="chrome-text" style={{ ...display, fontStyle: "italic", fontSize: size * 0.36, fontWeight: 700, display: "inline-block", lineHeight: 1.2, padding: "0 0.15em", textAlign: "center" }}>S</span>
       </div>
     </div>
   );
@@ -322,15 +386,99 @@ function OrbitDiagram({ size = 200 }) {
 /* ============================================================
    ORBITING TOOL ICONS — scattered in hero, orbit on hover-stop
    ============================================================ */
+/* Inline Vector Brand Logos */
+function ReactLogo() {
+  return (
+    <svg width="25" height="25" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="8" fill="#00D8FF" />
+      <ellipse cx="50" cy="50" rx="38" ry="14" stroke="#00D8FF" strokeWidth="4" />
+      <ellipse cx="50" cy="50" rx="38" ry="14" stroke="#00D8FF" strokeWidth="4" transform="rotate(60 50 50)" />
+      <ellipse cx="50" cy="50" rx="38" ry="14" stroke="#00D8FF" strokeWidth="4" transform="rotate(120 50 50)" />
+    </svg>
+  );
+}
+
+function TailwindLogo() {
+  return (
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 6.09 C8.2 6.09, 5.8 7.99, 4.85 11.79 C6.27 9.89, 7.69 9.18, 9.11 9.65 C9.92 9.92, 10.5 10.52, 11.13 11.17 C12.17 12.24, 13.43 13.53, 17.15 13.53 C20.95 13.53, 23.32 11.63, 24.27 7.83 C22.85 9.73, 21.43 10.44, 20.01 9.97 C19.2 9.7, 18.62 9.1, 17.99 8.45 C16.95 7.38, 15.69 6.09, 12 6.09 Z M4.85 13.53 C1.05 13.53, -1.32 15.43, -2.27 19.23 C-0.85 17.33, 0.57 16.62, 1.99 17.09 C2.8 17.36, 3.38 17.96, 4.01 18.61 C5.05 19.68, 6.31 20.97, 10.03 20.97 C13.83 20.97, 16.2 19.07, 17.15 15.27 C15.73 17.17, 14.31 17.88, 12.89 17.41 C12.08 17.14, 11.5 16.54, 10.87 15.89 C9.83 14.82, 8.57 13.53, 4.85 13.53 Z" fill="#06B6D4" />
+    </svg>
+  );
+}
+
+function FigmaLogo() {
+  return (
+    <svg width="16" height="24" viewBox="0 0 100 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 0,25 C 0,11.2 11.2,0 25,0 C 38.8,0 50,11.2 50,25 L 50,50 L 25,50 C 11.2,50 0,38.8 0,25 Z" fill="#F24E1E" />
+      <path d="M 50,25 C 50,11.2 61.2,0 75,0 C 88.8,0 100,11.2 100,25 C 100,38.8 88.8,50 75,50 L 50,50 Z" fill="#FF7262" />
+      <path d="M 0,75 C 0,61.2 11.2,50 25,50 L 50,50 L 50,100 L 25,100 C 11.2,100 0,88.8 0,75 Z" fill="#A259FF" />
+      <circle cx="75" cy="75" r="25" fill="#1ABC9C" />
+      <path d="M 0,125 C 0,111.2 11.2,100 25,100 C 38.8,100 50,111.2 50,125 C 50,138.8 38.8,150 25,150 C 11.2,150 0,138.8 0,125 Z" fill="#0ACF83" />
+    </svg>
+  );
+}
+
+function SupabaseLogo() {
+  return (
+    <svg width="22" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M21.36 11.02a.85.85 0 0 0-.75-.52h-7.65L16.2 3.12a.85.85 0 0 0-1.44-.84l-11.4 14.4a.85.85 0 0 0 .75 1.36h7.65L8.5 25.32a.85.85 0 0 0 1.44.84l11.4-14.4a.85.85 0 0 0 .02-.74z" fill="#3ECF8E" />
+    </svg>
+  );
+}
+
+function CanvaLogo() {
+  return (
+    <svg width="26" height="26" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="60" cy="60" r="50" fill="url(#canvaBgGrad)" />
+      <defs>
+        <linearGradient id="canvaBgGrad" x1="10" y1="10" x2="110" y2="110" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#00C4CC" />
+          <stop offset="100%" stopColor="#7D2AE8" />
+        </linearGradient>
+      </defs>
+      <path d="M 76,51 C 74,40 64,36 54,38 C 42,40 34,51 34,62 C 34,74 44,83 55,83 C 65,83 73,77 75,70 L 68,68 C 66,73 61,76 55,76 C 48,76 41,70 41,62 C 41,53 47,45 54,44 C 61,43 67,46 69,53 Z" fill="#FFFFFF" stroke="#FFFFFF" strokeWidth="1.2" />
+    </svg>
+  );
+}
+
+function NextjsLogo() {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="12" cy="12" r="10" fill="#000000" stroke="#FFFFFF" strokeWidth="1.5" />
+      <path d="M16.5 17.5 L8.5 7.5 H7.5 V16.5 H8.5 V9.5 L15.5 17.5 Z" fill="#FFFFFF" />
+    </svg>
+  );
+}
+
+function TypeScriptLogo() {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="24" height="24" rx="3" fill="#3178C6" />
+      <text x="5" y="17" fill="#FFFFFF" fontFamily="sans-serif" fontSize="11" fontWeight="bold">TS</text>
+    </svg>
+  );
+}
+
+function GitLogo() {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M19 12a3 3 0 0 0-2.82-2H13V7.82a3 3 0 1 0-2 0V15.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 1.5-1.5h.32a3 3 0 1 0 0-2H8A3.5 3.5 0 0 0 4.5 15.5 3.5 3.5 0 0 0 8 19a3.5 3.5 0 0 0 3.5-3.5V8.82A3 3 0 0 0 13 8h3.18A3 3 0 1 0 19 12z" fill="#F05032" />
+    </svg>
+  );
+}
+
+/* ============================================================
+   ORBITING TOOL ICONS — scattered in hero, orbit on hover-stop
+   ============================================================ */
 const TOOLS = [
-  { label: "React", color: "#8EC9FF", emoji: "\u269B\uFE0F" },
-  { label: "Next.js", color: "#C9B6FF", emoji: "\u25B2" },
-  { label: "TypeScript", color: "#8EC9FF", emoji: "TS" },
-  { label: "Figma", color: "#FFB8E6", emoji: "\uD83C\uDFA8" },
-  { label: "Supabase", color: "#B6FFE0", emoji: "\uD83D\uDFE2" },
-  { label: "Tailwind", color: "#FFD9B8", emoji: "\uD83C\uDF0A" },
-  { label: "Git", color: "#FF4D4D", emoji: "\u2387" },
-  { label: "Python", color: "#8EC9FF", emoji: "\uD83D\uDC0D" },
+  { label: "React", color: "#8EC9FF", LogoComponent: ReactLogo },
+  { label: "Next.js", color: "#C9B6FF", LogoComponent: NextjsLogo },
+  { label: "TypeScript", color: "#8EC9FF", LogoComponent: TypeScriptLogo },
+  { label: "Figma", color: "#FFB8E6", LogoComponent: FigmaLogo },
+  { label: "Supabase", color: "#B6FFE0", LogoComponent: SupabaseLogo },
+  { label: "Tailwind", color: "#FFD9B8", LogoComponent: TailwindLogo },
+  { label: "Git", color: "#FF4D4D", LogoComponent: GitLogo },
+  { label: "Canva", color: "#C9B6FF", LogoComponent: CanvaLogo },
 ];
 
 const TOOL_ANCHORS = [
@@ -344,7 +492,7 @@ const TOOL_ANCHORS = [
   { x: 92, y: 46 },
 ];
 
-function OrbitingTool({ label, color, emoji, anchor, index }) {
+function OrbitingTool({ label, color, LogoComponent, anchor, index }) {
   const ref = useRef(null);
   const [hovered, setHovered] = useState(false);
   const angleRef = useRef(index * (360 / TOOLS.length));
@@ -380,17 +528,16 @@ function OrbitingTool({ label, color, emoji, anchor, index }) {
         onMouseLeave={handleLeave}
         title={label}
         style={{
-          width: 50, height: 50, borderRadius: "50%",
+          width: 52, height: 52, borderRadius: "50%",
           background: `linear-gradient(135deg, ${color}CC, ${color}44)`,
           border: `1.5px solid rgba(11,11,12,0.2)`,
           boxShadow: hovered ? `0 8px 28px ${color}88` : `3px 3px 0 rgba(11,11,12,0.1)`,
-          display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
+          display: "flex", alignItems: "center", justifyContent: "center",
           cursor: "pointer", willChange: "transform", backdropFilter: "blur(4px)",
           transition: "box-shadow 0.3s",
         }}
       >
-        <span style={{ fontSize: 15, lineHeight: 1 }}>{emoji}</span>
-        <span style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 8, color: "rgba(11,11,12,0.65)", marginTop: 2 }}>{label}</span>
+        <LogoComponent />
       </div>
     </div>
   );
@@ -422,15 +569,15 @@ function FlipProcessCard({ Icon, title, desc, delay, backIndex }) {
         <div className={`flip-inner${flipped ? " flipped" : ""}`}>
           <div className="flip-face flip-front card-hard rounded-sm p-5">
             <Icon />
-            <p className="text-sm font-semibold mt-4 mb-1 uppercase tracking-wide" style={{ fontFamily: "'Space Grotesk',sans-serif", color: "#0B0B0C" }}>{title}</p>
-            <p className="text-xs leading-relaxed" style={{ fontFamily: "'JetBrains Mono',monospace", color: "rgba(11,11,12,0.6)" }}>{desc}</p>
+            <p className="text-sm font-semibold mt-4 mb-1 uppercase tracking-wide" style={{ ...bodyFont, color: C.ink }}>{title}</p>
+            <p className="text-xs leading-relaxed" style={{ ...mono, color: C.mute }}>{desc}</p>
           </div>
-          <div className="flip-face flip-back rounded-sm p-5" style={{ background: `linear-gradient(135deg, ${pastelBgs[backIndex % 4]}88, #C9B6FF44)`, border: "1.5px solid #0B0B0C", boxShadow: "8px 8px 0 rgba(11,11,12,0.1)" }}>
+          <div className="flip-face flip-back rounded-sm p-5" style={{ background: `linear-gradient(135deg, ${pastelBgs[backIndex % 4]}88, #C9B6FF44)`, border: "1.5px solid var(--ink)", boxShadow: "8px 8px 0 var(--shadow-color)" }}>
             <span style={{ fontSize: 28 }}>{back.icon}</span>
-            <p className="text-xs font-bold uppercase tracking-widest mt-3 mb-2" style={{ fontFamily: "'JetBrains Mono',monospace", color: "#0B0B0C" }}>{title}</p>
+            <p className="text-xs font-bold uppercase tracking-widest mt-3 mb-2" style={{ ...mono, color: C.ink }}>{title}</p>
             <div className="flex flex-wrap gap-1">
               {back.tools.map((t) => (
-                <span key={t} style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 10, padding: "2px 8px", borderRadius: 99, background: "rgba(255,255,255,0.65)", border: "1px solid #0B0B0C", color: "#0B0B0C" }}>{t}</span>
+                <span key={t} style={{ ...mono, fontSize: 10, padding: "2px 8px", borderRadius: 99, background: "var(--surface)", border: "1px solid var(--ink)", color: "var(--ink)" }}>{t}</span>
               ))}
             </div>
           </div>
@@ -602,16 +749,16 @@ function CardDeck({ items }) {
         {scattered ? "move cursor away to collapse ←" : "hover the deck to scatter →"}
       </p>
 
-      {/* Flex container that handles either fanned overlap or nowrap scrolling */}
+      {/* Flex container that handles either fanned overlap or wrapped scattering */}
       <div
         onMouseLeave={() => setScattered(false)}
         className="relative mx-auto flex no-scrollbar"
         style={{
           width: "100%",
           maxWidth: 1320,
-          flexWrap: "nowrap",
+          flexWrap: "wrap",
           justifyContent: "center",
-          overflowX: scattered || isMobile ? "auto" : "visible",
+          overflowX: "visible",
           padding: "16px 16px 24px",
           gap: scattered || isMobile ? 16 : 0,
           transition: "gap 0.5s cubic-bezier(.22,1,.36,1)",
@@ -626,33 +773,77 @@ function CardDeck({ items }) {
           return (
             <div
               key={it.group}
-              className="card-hard rounded-xl p-5 hover-lift"
+              className="card-hard rounded-xl p-5"
               style={{
-                background: it.bg,
+                background: "var(--white)",
                 position: "relative",
-                width: 190,
+                width: 225,
                 flexShrink: 0,
                 // Negative margin on left (except first card) to stack them in the center on desktop
-                marginLeft: !scattered && !isMobile && i > 0 ? -145 : 0,
+                marginLeft: !scattered && !isMobile && i > 0 ? -165 : 0,
                 zIndex: scattered ? 20 : n - i,
                 transform: !scattered && !isMobile
                   ? `translate(${stackX}px, ${stackY}px) rotate(${stackRot}deg) scale(1)`
                   : "translate(0px, 0px) rotate(0deg) scale(1)",
                 boxShadow: scattered
-                  ? "4px 6px 0 rgba(11,11,12,0.10)"
-                  : "6px 8px 0 rgba(11,11,12,0.13)",
-                transition: "margin-left 0.55s cubic-bezier(.22,1,.36,1), transform 0.55s cubic-bezier(.22,1,.36,1), box-shadow 0.3s ease",
+                  ? "4px 6px 0 var(--shadow-color)"
+                  : "6px 8px 0 var(--shadow-color)",
+                transition: "margin-left 0.55s cubic-bezier(.22,1,.36,1), transform 0.55s cubic-bezier(.22,1,.36,1), box-shadow 0.3s ease, background 0.3s",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = !scattered && !isMobile
+                  ? `translate(${stackX}px, ${stackY - 8}px) rotate(${stackRot}deg) scale(1.03)`
+                  : "translateY(-8px) scale(1.03)";
+                e.currentTarget.style.boxShadow = `10px 12px 0px ${it.bg}`;
+                e.currentTarget.style.zIndex = 50;
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = !scattered && !isMobile
+                  ? `translate(${stackX}px, ${stackY}px) rotate(${stackRot}deg) scale(1)`
+                  : "translate(0px, 0px) rotate(0deg) scale(1)";
+                e.currentTarget.style.boxShadow = scattered
+                  ? "4px 6px 0 var(--shadow-color)"
+                  : "6px 8px 0 var(--shadow-color)";
+                e.currentTarget.style.zIndex = scattered ? 20 : n - i;
               }}
             >
-              <p className="text-xs tracking-[0.15em] uppercase mb-3 font-semibold" style={{ ...mono, color: C.ink }}>
-                {it.group}
-              </p>
-              <div>
-                {it.items.map((x) => (
-                  <span key={x} className="block text-sm mb-1" style={{ ...bodyFont, color: C.ink, opacity: 0.85 }}>
-                    {x}
+              <p className="text-xs tracking-[0.15em] uppercase mb-4 font-bold border-b pb-2 flex items-center justify-between" style={{ ...mono, color: C.ink, borderColor: "var(--border)" }}>
+                <span>{it.group}</span>
+                {it.Icon && (
+                  <span style={{ color: it.bg }}>
+                    <it.Icon />
                   </span>
-                ))}
+                )}
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {it.items.map((x, idx) => {
+                  const pastelColors = ["#FFD9B8", "#8EC9FF", "#FFB8E6", "#B6FFE0", "#C9B6FF"];
+                  const bgCol = pastelColors[idx % pastelColors.length];
+                  return (
+                    <span
+                      key={x}
+                      className="inline-block text-[11px] font-bold px-2.5 py-1.5 rounded-full transition-all duration-200 cursor-default select-none"
+                      style={{
+                        ...mono,
+                        backgroundColor: bgCol,
+                        color: "#0B0B0C",
+                        border: "1.5px solid #0B0B0C",
+                        boxShadow: "1.5px 1.5px 0px rgba(11,11,12,0.15)",
+                        transform: "translateY(0)",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = "translateY(-3.5px)";
+                        e.currentTarget.style.boxShadow = "3.5px 3.5px 0px rgba(11,11,12,0.35)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = "translateY(0)";
+                        e.currentTarget.style.boxShadow = "1.5px 1.5px 0px rgba(11,11,12,0.15)";
+                      }}
+                    >
+                      {x}
+                    </span>
+                  );
+                })}
               </div>
             </div>
           );
@@ -720,8 +911,8 @@ function ChromeHero() {
         <BubbleCluster color={C.mint} size={42} />
       </div>
 
-      <div ref={orbit} className="hidden sm:block" style={{ position: "absolute", bottom: "8%", right: "18%", zIndex: 2, opacity: 0.75 }}>
-        <OrbitDiagram size={130} />
+      <div ref={orbit} className="hidden sm:block" style={{ position: "absolute", bottom: "8%", right: "18%", zIndex: 2, opacity: 1.0 }}>
+        <OrbitDiagram size={165} />
       </div>
 
       {/* Orbiting tool icons — lg+ only */}
@@ -781,6 +972,31 @@ function ChromeHero() {
    MAIN
    ============================================================ */
 export default function SimonePortfolio() {
+  const [isDark, setIsDark] = useState(false);
+
+  const [isOnboarding, setIsOnboarding] = useState(true);
+
+  useEffect(() => {
+    // Keep page strictly in light mode during the 5.5s onboarding/preloader sequence
+    const timer = setTimeout(() => {
+      setIsOnboarding(false);
+    }, 5500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    if (isDark && !isOnboarding) {
+      root.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      root.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [isDark, isOnboarding]);
+
+  const toggleTheme = () => setIsDark(!isDark);
+
   const nav = ["Work", "About", "Skills", "Contact"];
   const navMag = useMagnetic(0.2);
 
@@ -803,12 +1019,12 @@ export default function SimonePortfolio() {
   ];
 
   const toolbox = [
-    { group: "Languages", items: ["Java", "C", "Python", "JavaScript", "TypeScript", "HTML", "CSS"], bg: C.blue },
-    { group: "Frontend", items: ["React.js", "Next.js", "Tailwind CSS", "Zustand"], bg: C.pink },
-    { group: "Backend & Data", items: ["Supabase", "REST API Integration"], bg: C.mint },
-    { group: "AI/Tools", items: ["Nvidia API", "Git", "GitHub", "Figma"], bg: C.peach },
-    { group: "Community & Leadership", items: ["Cross-functional Delegation", "Technical Mentorship", "Event Logistics", "Production Timelines", "Strategic Planning"], bg: C.purple },
-    { group: "Design & Branding", items: ["UI/UX Architecture", "Visual Identity Systems", "Figma", "Canva", "Adobe After Effects", "Video Editing", "Digital Media Strategy"], bg: C.blue },
+    { group: "Languages", items: ["Java", "C", "Python", "JavaScript", "TypeScript", "HTML", "CSS"], bg: C.blue, Icon: MiniCodeIcon },
+    { group: "Frontend", items: ["React.js", "Next.js", "Tailwind CSS", "Zustand"], bg: C.pink, Icon: MiniLayoutIcon },
+    { group: "Backend & Data", items: ["Supabase", "REST API Integration"], bg: C.mint, Icon: MiniDbIcon },
+    { group: "AI/Tools", items: ["Nvidia API", "Git", "GitHub", "Figma"], bg: C.peach, Icon: MiniSparkleIcon },
+    { group: "Community & Leadership", items: ["Cross-functional Delegation", "Technical Mentorship", "Event Logistics", "Production Timelines", "Strategic Planning"], bg: C.purple, Icon: MiniUsersIcon },
+    { group: "Design & Branding", items: ["UI/UX Architecture", "Visual Identity Systems", "Figma", "Canva", "Adobe After Effects", "Video Editing", "Digital Media Strategy"], bg: C.blue, Icon: MiniPaletteIcon },
   ];
 
 
@@ -838,10 +1054,15 @@ export default function SimonePortfolio() {
           background: radial-gradient(circle, rgba(142,201,255,0.35), rgba(255,184,230,0.2) 45%, transparent 70%);
           pointer-events: none; z-index: 250; mix-blend-mode: multiply; filter: blur(6px);
         }
+        .dark .cursor-glow {
+          mix-blend-mode: screen;
+          background: radial-gradient(circle, rgba(142,201,255,0.18), rgba(255,184,230,0.08) 45%, transparent 70%);
+        }
         @media (hover: none) { .cursor-glow { display: none; } }
 
         .mesh-blob { position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.55; will-change: transform; }
         .mesh-still { opacity: 0.4; }
+        .dark .mesh-blob { opacity: 0.28 !important; }
 
         @keyframes floatY { 0%,100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-14px) rotate(3deg); } }
         .float-slow { animation: floatY 6s ease-in-out infinite; }
@@ -852,12 +1073,11 @@ export default function SimonePortfolio() {
 
         @keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
         .chrome-text {
-          background: linear-gradient(110deg, ${C.white} 0%, ${C.blue} 20%, ${C.white} 40%, ${C.purple} 60%, ${C.white} 80%, ${C.pink} 100%);
+          background: var(--chrome-gradient);
           background-size: 300% 300%;
           -webkit-background-clip: text; background-clip: text; color: transparent;
           animation: gradientShift 6s ease-in-out infinite;
-          filter: drop-shadow(0 6px 18px rgba(142,201,255,0.5));
-          -webkit-text-stroke: 1px rgba(11,11,12,0.08);
+          filter: drop-shadow(0 2px 4px rgba(11, 11, 12, 0.05)) drop-shadow(0 6px 20px rgba(142, 201, 255, 0.2));
         }
 
         @keyframes heroRise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
@@ -870,11 +1090,11 @@ export default function SimonePortfolio() {
         .flip-face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
         .flip-back { transform: rotateY(180deg); }
 
-        .frost-chip { border: 1.5px solid ${C.ink}; box-shadow: 3px 3px 0px rgba(11,11,12,0.12); transition: transform 0.3s cubic-bezier(.22,1,.36,1), box-shadow 0.3s ease; }
-        .frost-chip:hover { transform: translateY(-4px); box-shadow: 5px 6px 0px rgba(11,11,12,0.16); }
+        .frost-chip { border: 1.5px solid ${C.ink}; box-shadow: 3px 3px 0px var(--shadow-color); transition: transform 0.3s cubic-bezier(.22,1,.36,1), box-shadow 0.3s ease; }
+        .frost-chip:hover { transform: translateY(-4px); box-shadow: 5px 6px 0px var(--shadow-color); }
 
-        .ink-btn { transition: transform 0.15s ease, box-shadow 0.3s ease; box-shadow: 4px 4px 0px rgba(11,11,12,0.2); }
-        .ink-btn:hover { box-shadow: 6px 7px 0px rgba(11,11,12,0.25); }
+        .ink-btn { transition: transform 0.15s ease, box-shadow 0.3s ease; box-shadow: 4px 4px 0px var(--shadow-color); }
+        .ink-btn:hover { box-shadow: 6px 7px 0px var(--shadow-color); }
 
         .underline-grow { position: relative; }
         .underline-grow::after { content: ''; position: absolute; left: 0; bottom: -4px; height: 2px; width: 0%; background: ${C.ink}; transition: width 0.3s ease; }
@@ -883,16 +1103,16 @@ export default function SimonePortfolio() {
         @keyframes marqueeScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
         .marquee-track { display: flex; width: max-content; animation: marqueeScroll 22s linear infinite; }
 
-        .card-hard { border: 1.5px solid ${C.ink}; box-shadow: 8px 8px 0px rgba(11,11,12,0.1); background: ${C.white}; }
+        .card-hard { border: 1.5px solid ${C.ink}; box-shadow: 8px 8px 0px var(--shadow-color); background: ${C.white}; }
         .hover-lift { transition: transform 0.35s cubic-bezier(.22,1,.36,1), box-shadow 0.35s ease; }
-        .hover-lift:hover { transform: translateY(-6px); box-shadow: 10px 12px 0px rgba(11,11,12,0.12); }
+        .hover-lift:hover { transform: translateY(-6px); box-shadow: 10px 12px 0px var(--shadow-color); }
 
         /* edge badges */
         .edge-badge {
           position: fixed; top: 50%; transform: translateY(-50%);
           writing-mode: vertical-rl; text-orientation: mixed;
           z-index: 40; padding: 12px 8px; border-radius: 999px;
-          border: 1px solid rgba(11,11,12,0.2); background: rgba(255,255,255,0.65);
+          border: 1.5px solid var(--border); background: var(--surface);
           backdrop-filter: blur(10px);
         }
         .edge-badge span { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: ${C.ink}; }
@@ -902,21 +1122,21 @@ export default function SimonePortfolio() {
           position: fixed; bottom: 22px; right: 22px; z-index: 60;
           display: flex; align-items: center; gap: 6px;
           padding: 10px 16px; border-radius: 999px; border: 1.5px solid ${C.ink};
-          background: rgba(255,255,255,0.85); backdrop-filter: blur(10px);
+          background: var(--white); backdrop-filter: blur(10px);
           font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em;
           color: ${C.ink}; cursor: pointer; transition: transform 0.3s ease, opacity 0.3s ease, box-shadow 0.2s ease;
-          box-shadow: 3px 3px 0px rgba(11,11,12,0.15);
+          box-shadow: 3px 3px 0px var(--shadow-color);
         }
-        .scroll-top-pill:hover { box-shadow: 4px 5px 0px rgba(11,11,12,0.2); transform: translateY(-2px); }
+        .scroll-top-pill:hover { box-shadow: 4px 5px 0px var(--shadow-color); transform: translateY(-2px); }
 
         @keyframes pulseDot { 0%,100% { box-shadow: 0 0 0 0 rgba(61,220,132,0.5); } 70% { box-shadow: 0 0 0 6px rgba(61,220,132,0); } }
         .pulse-dot { width: 7px; height: 7px; border-radius: 50%; background: ${C.green}; display: inline-block; animation: pulseDot 2s ease-out infinite; }
 
         /* orbit diagram */
-        .orbit-ring { position: absolute; border: 1px dashed rgba(11,11,12,0.25); border-radius: 50%; }
+        .orbit-ring { position: absolute; border: 1.2px dashed var(--ink); border-radius: 50%; opacity: 0.45; }
         .orbit-spin { position: absolute; animation: spin linear infinite; }
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        .orbit-dot { position: absolute; top: 0; left: 50%; width: 9px; height: 9px; border-radius: 50%; transform: translate(-50%, -50%); border: 1.5px solid ${C.ink}; }
+        .orbit-dot { position: absolute; top: 0; left: 50%; width: 11px; height: 11px; border-radius: 50%; transform: translate(-50%, -50%); border: 1.5px solid ${C.ink}; }
 
         /* process icon animations */
         @keyframes pulseR { 0%,100% { r: 3; opacity: 1; } 50% { r: 4.5; opacity: 0.7; } }
@@ -947,8 +1167,7 @@ export default function SimonePortfolio() {
       <ScrollProgressBar />
       <ScrollTopPill />
 
-      {/* NAV */}
-      <header className="sticky top-0 z-30 flex items-center justify-between px-6 sm:px-10 py-5 border-b" style={{ backgroundColor: "rgba(234,240,251,0.75)", backdropFilter: "blur(14px)", borderColor: "rgba(11,11,12,0.12)" }}>
+      <header className="sticky top-0 z-30 flex items-center justify-between px-6 sm:px-10 py-5 border-b" style={{ backgroundColor: "var(--nav-bg)", backdropFilter: "blur(14px)", borderColor: "var(--border)", transition: "background-color 0.4s ease, border-color 0.4s ease" }}>
         <span className="text-base sm:text-lg font-semibold tracking-tight flex items-center gap-2" style={{ ...display, color: C.ink }}>
           Simone D'sa
           <span className="chrome-text" style={{ ...display, fontStyle: "italic", fontSize: "1.1rem" }}>*</span>
@@ -958,9 +1177,23 @@ export default function SimonePortfolio() {
             <a key={n} href={`#${n.toLowerCase()}`} className="text-xs tracking-[0.15em] uppercase underline-grow" style={{ ...mono, color: C.ink }}>{n}</a>
           ))}
         </nav>
-        <a ref={navMag.ref} onMouseMove={navMag.onMouseMove} onMouseLeave={navMag.onMouseLeave} href="https://mail.google.com/mail/?view=cm&fs=1&to=simonedsa0507@gmail.com" target="_blank" rel="noreferrer" className="text-xs px-4 py-2 rounded-full" style={{ ...mono, backgroundColor: C.ink, color: C.white }}>
-          Say hi
-        </a>
+        <div className="flex items-center gap-4">
+          <button
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+            className="p-2 rounded-full border bg-transparent hover:bg-[rgba(11,11,12,0.05)] dark:hover:bg-[rgba(255,255,255,0.08)] transition-all cursor-pointer flex items-center justify-center"
+            style={{ borderColor: "var(--border)", color: C.ink }}
+          >
+            {isDark ? (
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+            ) : (
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+            )}
+          </button>
+          <a ref={navMag.ref} onMouseMove={navMag.onMouseMove} onMouseLeave={navMag.onMouseLeave} href="https://mail.google.com/mail/?view=cm&fs=1&to=simonedsa0507@gmail.com" target="_blank" rel="noreferrer" className="text-xs px-4 py-2 rounded-full" style={{ ...mono, backgroundColor: C.ink, color: C.white }}>
+            Say hi
+          </a>
+        </div>
       </header>
 
       <ChromeHero />

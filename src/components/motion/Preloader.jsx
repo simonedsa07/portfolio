@@ -16,11 +16,10 @@ function CloudLogo() {
       {/* SVG Cloud background & vector sparkles */}
       <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 370 210" style={{ zIndex: 1 }}>
         <defs>
-          {/* Very soft translucent iridescent fill */}
+          {/* Solid white fill for maximum text contrast so it never merges with background */}
           <linearGradient id="cloudFillGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#8EC9FF28" />
-            <stop offset="50%" stopColor="#FFB8E628" />
-            <stop offset="100%" stopColor="#C9B6FF18" />
+            <stop offset="0%" stopColor="#FFFFFF" />
+            <stop offset="100%" stopColor="#F3F7FE" />
           </linearGradient>
 
           {/* Shifting gloss iridescent chrome lining gradient */}
@@ -49,64 +48,44 @@ function CloudLogo() {
           fill="url(#cloudFillGrad)"
           stroke="url(#chromeLining)"
           strokeWidth="3.5"
-          strokeLinejoin="round"
         />
       </svg>
 
-      {/* ── Micro-animated floating bubbles & sparkles ── */}
-      {/* Sparkle 1 (top-left) */}
-      <motion.svg
-        width="16" height="16" viewBox="0 0 16 16"
-        style={{ position: "absolute", top: "18%", left: "15%", zIndex: 3 }}
-        animate={{ scale: [0.85, 1.15, 0.85], rotate: [0, 10, 0] }}
-        transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}
-      >
-        <path d="M 0,8 Q 8,8 8,0 Q 8,8 16,8 Q 8,8 8,16 Q 8,8 0,8 Z" fill="#FFB8E6" stroke="#0B0B0C" strokeWidth="0.8" />
-      </motion.svg>
-
-      {/* Sparkle 2 (top-right) */}
-      <motion.svg
-        width="18" height="18" viewBox="0 0 16 16"
-        style={{ position: "absolute", top: "12%", right: "16%", zIndex: 3 }}
-        animate={{ scale: [1.1, 0.85, 1.1], rotate: [0, -15, 0] }}
+      {/* Bubble decoration fanning behind the cloud */}
+      <motion.div
+        className="absolute w-2 h-2 rounded-full"
+        style={{ right: 38, top: 48, backgroundColor: "#FFB8E6", zIndex: 0 }}
+        animate={{ y: [0, -4, 0] }}
+        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        className="absolute w-2.5 h-2.5 rounded-full"
+        style={{ left: 45, bottom: 42, backgroundColor: "#8EC9FF", zIndex: 0 }}
+        animate={{ y: [0, -5, 0] }}
         transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+      />
+      <motion.div
+        className="absolute rounded-full"
+        style={{ right: 54, bottom: 46, border: "1.5px solid #C9B6FF", zIndex: 0 }}
+        animate={{ y: [0, -6, 0] }}
+        transition={{ duration: 3.4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
       >
-        <path d="M 0,8 Q 8,8 8,0 Q 8,8 16,8 Q 8,8 8,16 Q 8,8 0,8 Z" fill="#8EC9FF" stroke="#0B0B0C" strokeWidth="0.8" />
-      </motion.svg>
-
-      {/* Sparkle 3 (bottom-left) */}
-      <motion.svg
-        width="12" height="12" viewBox="0 0 16 16"
-        style={{ position: "absolute", bottom: "16%", left: "18%", zIndex: 3 }}
-        animate={{ scale: [0.9, 1.2, 0.9] }}
-        transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
-      >
-        <path d="M 0,8 Q 8,8 8,0 Q 8,8 16,8 Q 8,8 8,16 Q 8,8 0,8 Z" fill="#C9B6FF" stroke="#0B0B0C" strokeWidth="0.8" />
-      </motion.svg>
-
-      {/* Sparkle 4 (bottom-right) */}
-      <motion.svg
-        width="14" height="14" viewBox="0 0 16 16"
-        style={{ position: "absolute", bottom: "18%", right: "20%", zIndex: 3 }}
-        animate={{ scale: [1.15, 0.85, 1.15] }}
-        transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
-      >
-        <path d="M 0,8 Q 8,8 8,0 Q 8,8 16,8 Q 8,8 8,16 Q 8,8 0,8 Z" fill="#B6FFE0" stroke="#0B0B0C" strokeWidth="0.8" />
-      </motion.svg>
+        <div style={{ width: 3, height: 3, borderRadius: "50%", backgroundColor: "#FFF", opacity: 0.7, margin: "2px 0 0 2px" }} />
+      </motion.div>
 
       {/* Bubble 1 (left mid) */}
       <motion.div
         className="absolute"
         style={{
-          width: 22, height: 22, borderRadius: "50%",
+          width: 32, height: 32, borderRadius: "50%",
           border: "1.2px solid #0B0B0C", backgroundColor: "rgba(142,201,255,0.25)",
-          top: "45%", left: "8%", zIndex: 3,
+          top: "40%", left: "5%", zIndex: 3,
           boxShadow: "inset -2px -2px 4px rgba(0,0,0,0.1)"
         }}
-        animate={{ y: [0, -8, 0], x: [0, 3, 0] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+        animate={{ y: [0, -10, 0], x: [0, 5, 0] }}
+        transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
       >
-        <div style={{ width: 4, height: 4, borderRadius: "50%", backgroundColor: "#FFF", opacity: 0.7, margin: "2px 0 0 3px" }} />
+        <div style={{ width: 6, height: 6, borderRadius: "50%", backgroundColor: "#FFF", opacity: 0.7, margin: "4px 0 0 5px" }} />
       </motion.div>
 
       {/* Bubble 2 (right mid) */}
@@ -128,14 +107,15 @@ function CloudLogo() {
       <motion.div
         className="absolute"
         style={{
-          width: 16, height: 16, borderRadius: "50%",
-          border: "1px solid #0B0B0C", backgroundColor: "rgba(201,182,255,0.25)",
-          top: "14%", left: "42%", zIndex: 3
+          width: 18, height: 18, borderRadius: "50%",
+          border: "1.2px solid #0B0B0C", backgroundColor: "rgba(201,182,255,0.25)",
+          top: "12%", left: "42%", zIndex: 3,
+          boxShadow: "inset -1px -1px 2px rgba(0,0,0,0.1)"
         }}
-        animate={{ y: [0, -6, 0] }}
-        transition={{ duration: 3.4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        animate={{ y: [0, -8, 0], x: [0, 3, 0] }}
+        transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut", delay: 1.2 }}
       >
-        <div style={{ width: 3, height: 3, borderRadius: "50%", backgroundColor: "#FFF", opacity: 0.7, margin: "2px 0 0 2px" }} />
+        <div style={{ width: 4, height: 4, borderRadius: "50%", backgroundColor: "#FFF", opacity: 0.7, margin: "2px 0 0 3px" }} />
       </motion.div>
 
       {/* Script & Sans-serif typography centered completely inside the Cloud */}
@@ -176,25 +156,20 @@ function CloudLogo() {
   );
 }
 
-
-export default function Preloader({
-  label = "PORTFOLIO",
-  minDuration = 5000,
-  onFinish,
-}) {
-  const [done, setDone] = useState(false);
+export default function Preloader({ label = "PORTFOLIO", minDuration = 5000, onFinish }) {
+  const [show, setShow] = useState(true);
 
   useEffect(() => {
-    const t = setTimeout(() => {
-      setDone(true);
-      onFinish?.();
+    const timer = setTimeout(() => {
+      setShow(false);
+      if (onFinish) onFinish();
     }, minDuration);
-    return () => clearTimeout(t);
+    return () => clearTimeout(timer);
   }, [minDuration, onFinish]);
 
   return (
     <AnimatePresence>
-      {!done && (
+      {show && (
         <motion.div
           key="preloader"
           className="fixed inset-0 z-[999] flex flex-col items-center justify-center overflow-hidden"
@@ -227,12 +202,13 @@ export default function Preloader({
               50% { transform: translate(30px, 50px) scale(1.2); }
             }
             .preloader-chrome {
-              background: linear-gradient(110deg, #0B0B0C 0%, #8EC9FF 35%, #FFB8E6 65%, #C9B6FF 85%, #0B0B0C 100%);
+              background: var(--chrome-gradient);
               background-size: 260% auto;
               -webkit-background-clip: text;
               background-clip: text;
               color: transparent;
               animation: preloaderGradient 4s ease infinite;
+              filter: drop-shadow(0 1px 3px rgba(11, 11, 12, 0.05));
             }
           `}</style>
 
@@ -309,7 +285,7 @@ export default function Preloader({
                 height: 12,
                 borderRadius: 99,
                 border: "2px solid #0B0B0C",
-                background: "rgba(255,255,255,0.5)",
+                background: "#FFFFFF",
                 backdropFilter: "blur(4px)"
               }}
             >
@@ -318,6 +294,7 @@ export default function Preloader({
                   height: "100%",
                   background: "linear-gradient(to right, #8EC9FF, #FFB8E6, #C9B6FF)",
                   borderRadius: 99,
+                  borderRight: "2px solid #0B0B0C", // Sharp ink boundary tip so loading is highly visible
                   originX: 0
                 }}
                 initial={{ scaleX: 0 }}
