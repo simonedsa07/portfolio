@@ -32,7 +32,7 @@
 
   font: 18px/145% var(--sans);
   letter-spacing: 0.18px;
-  color-scheme: light dark;
+  color-scheme: light;
   color: var(--text);
   background: var(--bg);
   font-synthesis: none;
@@ -43,31 +43,6 @@
   @media (max-width: 1024px) {
     font-size: 16px;
   }
-}
-
-/* Dark Mode Variable Overrides */
-.dark {
-  --bg: #0B0B0C;
-  --ink: #FAF9F6;
-  --white: #121214;
-  --blue: #2A6FBE;
-  --pink: #B53F7F;
-  --purple: #6A4FA3;
-  --mint: #117C50;
-  --peach: #BF6A2D;
-  --red: #C53A3A;
-  --green: #248A4E;
-  --mute: rgba(234,240,251,0.6);
-  
-  --border: rgba(234,240,251,0.15);
-  --surface: rgba(18, 18, 20, 0.5);
-  --shadow-color: rgba(0,0,0,0.4);
-  --nav-bg: rgba(11,11,12,0.75);
-  
-  --code-bg: rgba(234,240,251,0.1);
-
-  /* High-contrast light pastel chrome gradient for dark backgrounds */
-  --chrome-gradient: linear-gradient(110deg, #FAF9F6 0%, #8EC9FF 25%, #C9B6FF 50%, #FFB8E6 75%, #FAF9F6 100%);
 }
 
 body {

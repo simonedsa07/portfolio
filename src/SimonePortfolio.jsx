@@ -300,6 +300,48 @@ function BubbleCluster({ size = 60, color = C.blue }) {
   );
 }
 
+function IcedCoffee({ size = 52, color = "#C4A482" }) {
+  return (
+    <svg width={size} height={size * 1.3} viewBox="0 0 40 52" fill="none">
+      {/* Straw */}
+      <line x1="26" y1="2" x2="16" y2="28" stroke="#FFB8E6" strokeWidth="3" strokeLinecap="round" />
+      <line x1="26" y1="2" x2="16" y2="28" stroke={C.ink} strokeWidth="0.8" strokeLinecap="round" />
+      {/* Lid */}
+      <path d="M7 16 C 7 10, 33 10, 33 16" fill={C.white} stroke={C.ink} strokeWidth="1.5" />
+      <rect x="5" y="15" width="30" height="3" rx="1.5" fill={C.white} stroke={C.ink} strokeWidth="1.5" />
+      {/* Coffee Liquid */}
+      <path d="M9 22 L31 22 L27 46 L13 46 Z" fill={color} />
+      {/* Ice Cubes */}
+      <rect x="12" y="24" width="7" height="7" rx="1" transform="rotate(15 12 24)" fill={C.white} opacity="0.6" stroke={C.ink} strokeWidth="1" />
+      <rect x="22" y="28" width="6" height="6" rx="1" transform="rotate(-10 22 28)" fill={C.white} opacity="0.6" stroke={C.ink} strokeWidth="1" />
+      {/* Cup Body */}
+      <path d="M8 18 L32 18 L28 48 C27.8 49 26.8 50 25 50 L15 50 C13.2 50 12.2 49 12 48 Z" stroke={C.ink} strokeWidth="1.5" strokeLinejoin="round" />
+      {/* Condensation drips */}
+      <circle cx="12" cy="38" r="1" fill={C.blue} />
+      <circle cx="28" cy="32" r="0.8" fill={C.blue} />
+    </svg>
+  );
+}
+
+function Headphones({ size = 52, color = C.purple }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 48 48" fill="none">
+      {/* Arch/Band */}
+      <path d="M8 24 A 16 16 0 0 1 40 24" stroke={C.ink} strokeWidth="2.5" fill="none" strokeLinecap="round" />
+      <path d="M6 24 A 18 18 0 0 1 42 24" stroke={color} strokeWidth="1.5" fill="none" strokeLinecap="round" />
+      {/* Earcup connectors */}
+      <line x1="8" y1="22" x2="8" y2="30" stroke={C.ink} strokeWidth="1.5" />
+      <line x1="40" y1="22" x2="40" y2="30" stroke={C.ink} strokeWidth="1.5" />
+      {/* Earcups */}
+      <rect x="4" y="24" width="8" height="12" rx="3.5" fill={color} stroke={C.ink} strokeWidth="1.5" />
+      <rect x="36" y="24" width="8" height="12" rx="3.5" fill={color} stroke={C.ink} strokeWidth="1.5" />
+      {/* Inner ear cushions */}
+      <rect x="9" y="26" width="3" height="8" rx="1.5" fill={C.white} stroke={C.ink} strokeWidth="1" />
+      <rect x="36" y="26" width="3" height="8" rx="1.5" fill={C.white} stroke={C.ink} strokeWidth="1" />
+    </svg>
+  );
+}
+
 function MiniCodeIcon() {
   return (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.85 }}>
@@ -387,9 +429,9 @@ function OrbitDiagram({ size = 200 }) {
    ORBITING TOOL ICONS — scattered in hero, orbit on hover-stop
    ============================================================ */
 /* Inline Vector Brand Logos */
-function ReactLogo() {
+function ReactLogo({ size = 36 }) {
   return (
-    <svg width="25" height="25" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width={size} height={size} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="50" cy="50" r="8" fill="#00D8FF" />
       <ellipse cx="50" cy="50" rx="38" ry="14" stroke="#00D8FF" strokeWidth="4" />
       <ellipse cx="50" cy="50" rx="38" ry="14" stroke="#00D8FF" strokeWidth="4" transform="rotate(60 50 50)" />
@@ -398,17 +440,17 @@ function ReactLogo() {
   );
 }
 
-function TailwindLogo() {
+function TailwindLogo({ size = 36 }) {
   return (
-    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M12 6.09 C8.2 6.09, 5.8 7.99, 4.85 11.79 C6.27 9.89, 7.69 9.18, 9.11 9.65 C9.92 9.92, 10.5 10.52, 11.13 11.17 C12.17 12.24, 13.43 13.53, 17.15 13.53 C20.95 13.53, 23.32 11.63, 24.27 7.83 C22.85 9.73, 21.43 10.44, 20.01 9.97 C19.2 9.7, 18.62 9.1, 17.99 8.45 C16.95 7.38, 15.69 6.09, 12 6.09 Z M4.85 13.53 C1.05 13.53, -1.32 15.43, -2.27 19.23 C-0.85 17.33, 0.57 16.62, 1.99 17.09 C2.8 17.36, 3.38 17.96, 4.01 18.61 C5.05 19.68, 6.31 20.97, 10.03 20.97 C13.83 20.97, 16.2 19.07, 17.15 15.27 C15.73 17.17, 14.31 17.88, 12.89 17.41 C12.08 17.14, 11.5 16.54, 10.87 15.89 C9.83 14.82, 8.57 13.53, 4.85 13.53 Z" fill="#06B6D4" />
     </svg>
   );
 }
 
-function FigmaLogo() {
+function FigmaLogo({ size = 36 }) {
   return (
-    <svg width="16" height="24" viewBox="0 0 100 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width={size * 0.67} height={size} viewBox="0 0 100 150" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M 0,25 C 0,11.2 11.2,0 25,0 C 38.8,0 50,11.2 50,25 L 50,50 L 25,50 C 11.2,50 0,38.8 0,25 Z" fill="#F24E1E" />
       <path d="M 50,25 C 50,11.2 61.2,0 75,0 C 88.8,0 100,11.2 100,25 C 100,38.8 88.8,50 75,50 L 50,50 Z" fill="#FF7262" />
       <path d="M 0,75 C 0,61.2 11.2,50 25,50 L 50,50 L 50,100 L 25,100 C 11.2,100 0,88.8 0,75 Z" fill="#A259FF" />
@@ -418,17 +460,17 @@ function FigmaLogo() {
   );
 }
 
-function SupabaseLogo() {
+function SupabaseLogo({ size = 36 }) {
   return (
-    <svg width="22" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width={size * 0.92} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M21.36 11.02a.85.85 0 0 0-.75-.52h-7.65L16.2 3.12a.85.85 0 0 0-1.44-.84l-11.4 14.4a.85.85 0 0 0 .75 1.36h7.65L8.5 25.32a.85.85 0 0 0 1.44.84l11.4-14.4a.85.85 0 0 0 .02-.74z" fill="#3ECF8E" />
     </svg>
   );
 }
 
-function CanvaLogo() {
+function CanvaLogo({ size = 36 }) {
   return (
-    <svg width="26" height="26" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width={size} height={size} viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="60" cy="60" r="50" fill="url(#canvaBgGrad)" />
       <defs>
         <linearGradient id="canvaBgGrad" x1="10" y1="10" x2="110" y2="110" gradientUnits="userSpaceOnUse">
@@ -441,27 +483,27 @@ function CanvaLogo() {
   );
 }
 
-function NextjsLogo() {
+function NextjsLogo({ size = 36 }) {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="12" cy="12" r="10" fill="#000000" stroke="#FFFFFF" strokeWidth="1.5" />
       <path d="M16.5 17.5 L8.5 7.5 H7.5 V16.5 H8.5 V9.5 L15.5 17.5 Z" fill="#FFFFFF" />
     </svg>
   );
 }
 
-function TypeScriptLogo() {
+function TypeScriptLogo({ size = 36 }) {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect width="24" height="24" rx="3" fill="#3178C6" />
       <text x="5" y="17" fill="#FFFFFF" fontFamily="sans-serif" fontSize="11" fontWeight="bold">TS</text>
     </svg>
   );
 }
 
-function GitLogo() {
+function GitLogo({ size = 36 }) {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M19 12a3 3 0 0 0-2.82-2H13V7.82a3 3 0 1 0-2 0V15.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 1.5-1.5h.32a3 3 0 1 0 0-2H8A3.5 3.5 0 0 0 4.5 15.5 3.5 3.5 0 0 0 8 19a3.5 3.5 0 0 0 3.5-3.5V8.82A3 3 0 0 0 13 8h3.18A3 3 0 1 0 19 12z" fill="#F05032" />
     </svg>
   );
@@ -528,16 +570,17 @@ function OrbitingTool({ label, color, LogoComponent, anchor, index }) {
         onMouseLeave={handleLeave}
         title={label}
         style={{
-          width: 52, height: 52, borderRadius: "50%",
+          width: 76, height: 76, borderRadius: "50%",
           background: `linear-gradient(135deg, ${color}CC, ${color}44)`,
           border: `1.5px solid rgba(11,11,12,0.2)`,
           boxShadow: hovered ? `0 8px 28px ${color}88` : `3px 3px 0 rgba(11,11,12,0.1)`,
-          display: "flex", alignItems: "center", justifyContent: "center",
+          display: "flex", alignItems: "center", justifycontent: "center",
           cursor: "pointer", willChange: "transform", backdropFilter: "blur(4px)",
-          transition: "box-shadow 0.3s",
+          transition: "box-shadow 0.3s, width 0.3s, height 0.3s",
+          display: "flex", alignItems: "center", justifyContent: "center",
         }}
       >
-        <LogoComponent />
+        <LogoComponent size={36} />
       </div>
     </div>
   );
@@ -572,7 +615,7 @@ function FlipProcessCard({ Icon, title, desc, delay, backIndex }) {
             <p className="text-sm font-semibold mt-4 mb-1 uppercase tracking-wide" style={{ ...bodyFont, color: C.ink }}>{title}</p>
             <p className="text-xs leading-relaxed" style={{ ...mono, color: C.mute }}>{desc}</p>
           </div>
-          <div className="flip-face flip-back rounded-sm p-5" style={{ background: `linear-gradient(135deg, ${pastelBgs[backIndex % 4]}88, #C9B6FF44)`, border: "1.5px solid var(--ink)", boxShadow: "8px 8px 0 var(--shadow-color)" }}>
+          <div className="flip-face flip-back rounded-sm p-5" style={{ background: `linear-gradient(135deg, ${pastelBgs[backIndex % 4]}88, #C9B6FF44)`, backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)", border: "1.5px solid var(--ink)", boxShadow: "8px 8px 0 var(--shadow-color)" }}>
             <span style={{ fontSize: 28 }}>{back.icon}</span>
             <p className="text-xs font-bold uppercase tracking-widest mt-3 mb-2" style={{ ...mono, color: C.ink }}>{title}</p>
             <div className="flex flex-wrap gap-1">
@@ -775,7 +818,6 @@ function CardDeck({ items }) {
               key={it.group}
               className="card-hard rounded-xl p-5"
               style={{
-                background: "var(--white)",
                 position: "relative",
                 width: 225,
                 flexShrink: 0,
@@ -788,7 +830,7 @@ function CardDeck({ items }) {
                 boxShadow: scattered
                   ? "4px 6px 0 var(--shadow-color)"
                   : "6px 8px 0 var(--shadow-color)",
-                transition: "margin-left 0.55s cubic-bezier(.22,1,.36,1), transform 0.55s cubic-bezier(.22,1,.36,1), box-shadow 0.3s ease, background 0.3s",
+                transition: "margin-left 0.55s cubic-bezier(.22,1,.36,1), transform 0.55s cubic-bezier(.22,1,.36,1), box-shadow 0.3s ease, background 0.3s, border-color 0.3s",
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = !scattered && !isMobile
@@ -972,30 +1014,11 @@ function ChromeHero() {
    MAIN
    ============================================================ */
 export default function SimonePortfolio() {
-  const [isDark, setIsDark] = useState(false);
-
-  const [isOnboarding, setIsOnboarding] = useState(true);
-
-  useEffect(() => {
-    // Keep page strictly in light mode during the 5.5s onboarding/preloader sequence
-    const timer = setTimeout(() => {
-      setIsOnboarding(false);
-    }, 5500);
-    return () => clearTimeout(timer);
-  }, []);
-
   useEffect(() => {
     const root = document.documentElement;
-    if (isDark && !isOnboarding) {
-      root.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      root.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
-  }, [isDark, isOnboarding]);
-
-  const toggleTheme = () => setIsDark(!isDark);
+    root.classList.remove("dark");
+    localStorage.setItem("theme", "light");
+  }, []);
 
   const nav = ["Work", "About", "Skills", "Contact"];
   const navMag = useMagnetic(0.2);
@@ -1054,15 +1077,10 @@ export default function SimonePortfolio() {
           background: radial-gradient(circle, rgba(142,201,255,0.35), rgba(255,184,230,0.2) 45%, transparent 70%);
           pointer-events: none; z-index: 250; mix-blend-mode: multiply; filter: blur(6px);
         }
-        .dark .cursor-glow {
-          mix-blend-mode: screen;
-          background: radial-gradient(circle, rgba(142,201,255,0.18), rgba(255,184,230,0.08) 45%, transparent 70%);
-        }
         @media (hover: none) { .cursor-glow { display: none; } }
 
         .mesh-blob { position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.55; will-change: transform; }
         .mesh-still { opacity: 0.4; }
-        .dark .mesh-blob { opacity: 0.28 !important; }
 
         @keyframes floatY { 0%,100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-14px) rotate(3deg); } }
         .float-slow { animation: floatY 6s ease-in-out infinite; }
@@ -1103,7 +1121,13 @@ export default function SimonePortfolio() {
         @keyframes marqueeScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
         .marquee-track { display: flex; width: max-content; animation: marqueeScroll 22s linear infinite; }
 
-        .card-hard { border: 1.5px solid ${C.ink}; box-shadow: 8px 8px 0px var(--shadow-color); background: ${C.white}; }
+        .card-hard {
+          border: 1.5px solid ${C.ink};
+          box-shadow: 8px 8px 0px var(--shadow-color);
+          background: rgba(255, 255, 255, 0.25);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+        }
         .hover-lift { transition: transform 0.35s cubic-bezier(.22,1,.36,1), box-shadow 0.35s ease; }
         .hover-lift:hover { transform: translateY(-6px); box-shadow: 10px 12px 0px var(--shadow-color); }
 
@@ -1178,18 +1202,6 @@ export default function SimonePortfolio() {
           ))}
         </nav>
         <div className="flex items-center gap-4">
-          <button
-            onClick={toggleTheme}
-            aria-label="Toggle theme"
-            className="p-2 rounded-full border bg-transparent hover:bg-[rgba(11,11,12,0.05)] dark:hover:bg-[rgba(255,255,255,0.08)] transition-all cursor-pointer flex items-center justify-center"
-            style={{ borderColor: "var(--border)", color: C.ink }}
-          >
-            {isDark ? (
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
-            ) : (
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
-            )}
-          </button>
           <a ref={navMag.ref} onMouseMove={navMag.onMouseMove} onMouseLeave={navMag.onMouseLeave} href="https://mail.google.com/mail/?view=cm&fs=1&to=simonedsa0507@gmail.com" target="_blank" rel="noreferrer" className="text-xs px-4 py-2 rounded-full" style={{ ...mono, backgroundColor: C.ink, color: C.white }}>
             Say hi
           </a>
@@ -1266,6 +1278,14 @@ export default function SimonePortfolio() {
         <div className="float-b" style={{ position: "absolute", top: "30%", left: "8%", zIndex: 2, animationDelay: "-0.8s", opacity: 0.65 }}>
           <BubbleCluster color={C.mint} size={44} />
         </div>
+        {/* iced coffee - floating bottom/right area */}
+        <div className="float-slow" style={{ position: "absolute", bottom: "25%", right: "3%", zIndex: 2, animationDelay: "-2.2s", opacity: 0.85 }}>
+          <IcedCoffee size={48} />
+        </div>
+        {/* headphones - floating right/upper-mid area */}
+        <div className="float-alt" style={{ position: "absolute", top: "22%", right: "6%", zIndex: 2, animationDelay: "-1.7s", opacity: 0.85 }}>
+          <Headphones size={48} color={C.pink} />
+        </div>
 
         <div className="relative" style={{ zIndex: 3 }}>
           <Eyebrow index="03" label="A little about me" />
@@ -1292,28 +1312,28 @@ export default function SimonePortfolio() {
               </div>
             </Reveal>
 
-            {/* Hand-drawn arrow connector + micro-floaters inside the column gap */}
-            <div className="hidden lg:block absolute left-[300px] md:left-[335px] lg:left-[365px] top-[30%] -translate-y-1/2 z-10 pointer-events-none">
+            {/* Hand-drawn arrow connector pointing to the photo inside the column gap */}
+            <div className="hidden lg:block absolute left-[354px] top-[30%] -translate-y-1/2 z-10 pointer-events-none">
               <div className="float-slow" style={{ animationDuration: "5s" }}>
-                <svg width="110" height="60" viewBox="0 0 110 60" fill="none">
-                  {/* curvier, better-aligned arrow line */}
+                <svg width="76" height="50" viewBox="0 0 76 50" fill="none">
+                  {/* curvier, left-pointing arrow line */}
                   <path
-                    d="M10 42 C 35 48, 65 24, 95 16"
+                    d="M66 36 C 54 38, 30 22, 10 16"
                     stroke={C.ink}
                     strokeWidth="1.8"
                     strokeDasharray="5 4"
                     strokeLinecap="round"
                   />
-                  {/* arrow head */}
+                  {/* arrow head pointing left */}
                   <path
-                    d="M82 12 L97 15 L89 27"
+                    d="M22 8 L8 16 L20 27"
                     stroke={C.ink}
                     strokeWidth="1.8"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
                 </svg>
-                <span className="block text-[11px] font-bold tracking-wider" style={{ ...mono, color: C.pink, transform: "rotate(6deg) translate(14px, -6px)", whiteSpace: "nowrap" }}>
+                <span className="block text-[11px] font-bold tracking-wider" style={{ ...mono, color: C.pink, transform: "rotate(-6deg) translate(6px, -2px)", whiteSpace: "nowrap" }}>
                   that's me! ✦
                 </span>
               </div>
@@ -1370,9 +1390,11 @@ export default function SimonePortfolio() {
 
           <Reveal from="translateX(-60px) scale(0.97)" to="translateX(0) scale(1)" duration={900}>
             <div
-              className="rounded-xl p-7 sm:p-10 relative"
+              className="card-hard rounded-xl p-7 sm:p-10 relative"
               style={{
-                background: `linear-gradient(135deg, ${C.white} 0%, ${C.blue}28 55%, ${C.purple}20 100%)`,
+                background: `linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, ${C.blue}22 55%, ${C.purple}1a 100%)`,
+                backdropFilter: "blur(16px)",
+                WebkitBackdropFilter: "blur(16px)",
                 border: `1.5px solid ${C.ink}`,
                 boxShadow: "8px 8px 0 rgba(11,11,12,0.1)",
               }}
